@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOS ESPORTS — Neurocognitive Performance Training for Competitive Gamers</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #05060a;
+    --bg-card: #0a0c14;
+    --bg-surface: #0d1018;
+    --neon: #00ff88;
+    --neon-dim: rgba(0, 255, 136, 0.08);
+    --neon-glow: rgba(0, 255, 136, 0.35);
+    --neon-bright: rgba(0, 255, 136, 0.6);
+    --electric: #00d4ff;
+    --electric-dim: rgba(0, 212, 255, 0.08);
+    --electric-glow: rgba(0, 212, 255, 0.3);
+    --hot: #ff2d6b;
+    --hot-dim: rgba(255, 45, 107, 0.1);
+    --hot-glow: rgba(255, 45, 107, 0.3);
+    --gold: #ffd54f;
+    --gold-dim: rgba(255, 213, 79, 0.1);
+    --text: #e8e6e1;
+    --text-mid: #6b6e78;
+    --text-dim: #2a2d36;
+    --border: rgba(0, 255, 136, 0.06);
+    --border-bright: rgba(0, 255, 136, 0.15);
+    --glass: rgba(255,255,255,0.02);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── SCANLINES ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    background: rgba(5,6,10,0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--neon);
+    text-decoration: none;
+    text-shadow: 0 0 20px var(--neon-glow);
+  }
+
+  .nav-logo span {
+    color: var(--text-dim);
+    font-weight: 400;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    text-shadow: none;
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+  .nav-links a {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    text-decoration: none;
+    transition: all 0.2s;
+    padding: 0.3rem 0;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--neon);
+    box-shadow: 0 0 6px var(--neon-glow);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--neon); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--neon); }
+  .nav-links a.active::after { width: 100%; }
+
+  .nav-cta {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--neon);
+    color: var(--bg);
+    border: none;
+    padding: 0.6rem 1.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+
+  .nav-cta:hover {
+    box-shadow: 0 0 30px var(--neon-glow), inset 0 0 30px rgba(0,255,136,0.15);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 2rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -10%; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 900px;
+    background: radial-gradient(circle, rgba(0,255,136,0.07) 0%, rgba(0,212,255,0.03) 40%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Grid overlay on hero */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 250px;
+    background: linear-gradient(to top, var(--bg), transparent);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--neon);
+    border: 1px solid var(--border-bright);
+    padding: 0.5rem 1.8rem;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.8s ease-out 0.2s both;
+    position: relative;
+  }
+
+  .hero-tag::before {
+    content: '>';
+    margin-right: 0.5rem;
+    opacity: 0.5;
+  }
+
+  .hero h1 {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 8vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    animation: fadeUp 0.8s ease-out 0.4s both;
+  }
+
+  .hero h1 .glow-text {
+    display: block;
+    color: var(--neon);
+    text-shadow: 0 0 40px var(--neon-glow), 0 0 80px rgba(0,255,136,0.15);
+  }
+
+  .hero h1 .sub-line {
+    display: block;
+    font-size: 0.35em;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    color: var(--text-mid);
+    margin-top: 0.5rem;
+    text-shadow: none;
+  }
+
+  .hero-desc {
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    font-weight: 400;
+    color: var(--text-mid);
+    max-width: 580px;
+    margin-top: 2rem;
+    line-height: 1.8;
+    animation: fadeUp 0.8s ease-out 0.6s both;
+  }
+
+  .hero-stats-row {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+    animation: fadeUp 0.8s ease-out 0.8s both;
+  }
+
+  .hero-mini-stat {
+    text-align: center;
+  }
+
+  .hero-mini-stat .val {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--neon);
+    text-shadow: 0 0 15px var(--neon-glow);
+    line-height: 1;
+  }
+
+  .hero-mini-stat .label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.3rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    animation: fadeUp 0.8s ease-out 1s both;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-neon {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--neon);
+    color: var(--bg);
+    border: none;
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    display: inline-block;
+  }
+
+  .btn-neon:hover {
+    box-shadow: 0 0 40px var(--neon-glow), 0 8px 30px rgba(0,0,0,0.5);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-bright);
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+
+  .btn-ghost:hover { border-color: var(--neon); color: var(--neon); background: var(--neon-dim); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 3rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 2;
+    animation: fadeUp 0.8s ease-out 1.2s both;
+  }
+
+  .scroll-hint span {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--neon), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--neon);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px var(--neon-glow);
+  }
+
+  .section-label::before { content: '// '; opacity: 0.4; }
+
+  .section-title {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .section-desc {
+    color: var(--text-mid);
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 620px;
+    font-weight: 400;
+  }
+
+  .divider { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .divider-line { height: 1px; background: linear-gradient(to right, transparent, var(--border-bright), transparent); }
+
+  /* ─── SKILLS GRID ─── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .skill-card {
+    background: var(--bg);
+    padding: 2.5rem;
+    position: relative;
+    transition: all 0.4s ease;
+    overflow: hidden;
+  }
+
+  .skill-card:hover { background: var(--bg-card); }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--neon);
+    box-shadow: 0 0 10px var(--neon-glow);
+    transition: width 0.4s ease;
+  }
+
+  .skill-card:hover::before { width: 100%; }
+
+  .skill-icon { font-size: 1.6rem; margin-bottom: 1rem; display: block; }
+
+  .skill-card h3 {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.7rem;
+  }
+
+  .skill-card p { color: var(--text-mid); font-size: 0.88rem; line-height: 1.7; font-weight: 400; }
+
+  /* ─── SCIENCE SECTION ─── */
+  .science-grid { margin-top: 3rem; display: grid; gap: 1rem; }
+
+  .science-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    align-items: start;
+    border: 1px solid var(--border);
+    background: var(--glass);
+    padding: 2rem 2.5rem;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .science-row:hover { border-color: var(--border-bright); background: var(--neon-dim); }
+
+  .science-row::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--neon);
+    box-shadow: 0 0 8px var(--neon-glow);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .science-row:hover::after { opacity: 1; }
+
+  .science-name {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--electric);
+  }
+
+  .science-desc { color: var(--text-mid); font-size: 0.92rem; line-height: 1.7; font-weight: 400; }
+
+  /* ─── PROTOCOLS ─── */
+  .protocols-list { margin-top: 3rem; }
+
+  .protocol-item {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    align-items: start;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid var(--border);
+    gap: 1.5rem;
+  }
+
+  .protocol-item:first-child { border-top: 1px solid var(--border); }
+
+  .protocol-num {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    color: var(--text-dim);
+  }
+
+  .protocol-content h3 {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+
+  .protocol-content p { color: var(--text-mid); font-size: 0.88rem; line-height: 1.7; font-weight: 400; }
+
+  /* ─── STATS ─── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .stat-card {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    border: 1px solid var(--border);
+    position: relative;
+    background: var(--glass);
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, var(--neon-dim), transparent 70%);
+    pointer-events: none;
+  }
+
+  .stat-number {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    color: var(--neon);
+    text-shadow: 0 0 20px var(--neon-glow);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-mid);
+    margin-top: 0.8rem;
+  }
+
+  .stat-detail { font-size: 0.75rem; color: var(--text-dim); margin-top: 0.4rem; font-weight: 400; }
+
+  /* ─── EFFICACY ─── */
+  .efficacy-section {
+    margin-top: 4rem;
+    padding: 3rem;
+    border: 1px solid var(--border);
+    background: var(--glass);
+  }
+
+  .efficacy-title {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 2rem;
+    color: var(--text-mid);
+  }
+
+  .efficacy-bars { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .efficacy-row {
+    display: grid;
+    grid-template-columns: 150px 1fr 60px;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .efficacy-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--text-mid);
+    text-transform: uppercase;
+  }
+
+  .bar-track { height: 6px; background: rgba(255,255,255,0.04); border-radius: 1px; overflow: hidden; }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 1px;
+    background: linear-gradient(90deg, var(--neon), var(--electric));
+    box-shadow: 0 0 10px var(--neon-glow);
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .bar-fill.animated { width: var(--target-width); }
+
+  .efficacy-value {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--neon);
+    text-align: right;
+  }
+
+  /* ─── AUDIENCE ─── */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    margin-top: 3rem;
+  }
+
+  .audience-card {
+    background: var(--bg);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .audience-card:hover { background: var(--bg-card); }
+  .audience-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+  .audience-card h3 {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .audience-card p { color: var(--text-dim); font-size: 0.78rem; margin-top: 0.4rem; }
+
+  /* ══════════════════════════════
+     TRAINING HUB
+     ══════════════════════════════ */
+  .training-hub {
+    padding: 6rem 2rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .training-hub::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(circle, var(--electric-glow) 0%, transparent 70%);
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .game-card {
+    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+  }
+
+  .game-card.active-game { cursor: pointer; }
+
+  .game-card.active-game:hover {
+    border-color: var(--neon);
+    transform: translateY(-4px);
+    box-shadow: 0 0 30px rgba(0,255,136,0.1), 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .game-card.coming-soon { opacity: 0.35; cursor: default; }
+
+  .game-card-header { padding: 2rem 2rem 1.5rem; position: relative; }
+
+  .game-card-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .game-card.active-game .game-card-header::before {
+    background: linear-gradient(90deg, var(--neon), var(--electric));
+    box-shadow: 0 0 10px var(--neon-glow);
+  }
+
+  .game-card.coming-soon .game-card-header::before { background: var(--border); }
+
+  .game-status {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .status-live { color: var(--neon); background: var(--neon-dim); border: 1px solid rgba(0,255,136,0.2); }
+  .status-soon { color: var(--text-dim); background: rgba(255,255,255,0.02); border: 1px solid var(--border); }
+
+  .game-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+
+  .game-card h3 {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.6rem;
+  }
+
+  .game-card p { color: var(--text-mid); font-size: 0.82rem; line-height: 1.7; }
+
+  .game-tiers {
+    padding: 0 2rem 1.5rem;
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .tier-dot { width: 100%; height: 3px; border-radius: 1px; background: rgba(255,255,255,0.04); }
+  .tier-dot.filled { background: linear-gradient(90deg, var(--neon), var(--electric)); box-shadow: 0 0 4px var(--neon-glow); }
+
+  .game-card-footer {
+    padding: 1.2rem 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .game-tags { display: flex; gap: 0.5rem; }
+
+  .game-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.5rem;
+  }
+
+  .game-launch-btn {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--neon);
+    color: var(--bg);
+    border: none;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  }
+
+  .game-launch-btn:hover { box-shadow: 0 0 20px var(--neon-glow); }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    text-align: center;
+    padding: 8rem 2rem;
+    position: relative;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,255,136,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section .section-title { font-size: clamp(1.8rem, 4.5vw, 3.2rem); margin-bottom: 1rem; }
+
+  .cta-section p {
+    color: var(--text-mid);
+    font-size: 1rem;
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.8;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+
+  footer p {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scrollPulse { 0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; } 50% { opacity: 1; transform: scaleY(1); } }
+
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .science-row { grid-template-columns: 1fr; gap: 0.5rem; }
+    .efficacy-row { grid-template-columns: 1fr; gap: 0.5rem; }
+    .efficacy-row .efficacy-value { text-align: left; }
+    section, .training-hub { padding: 4rem 1.5rem; }
+    .nav { padding: 1rem 1.5rem; }
+    .hero-stats-row { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#top" class="nav-logo">BOS ESPORTS<span>// neuro.training</span></a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#science">Science</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#training" class="active">Train</a></li>
+  </ul>
+  <a href="#training" class="nav-cta">Start Training</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="hero-grid"></div>
+  <div class="hero-tag">Neurocognitive Performance Protocol</div>
+  <h1>
+    <span>Train Your</span>
+    <span class="glow-text">Brain</span>
+    <span class="sub-line">Neuroscience-Backed Training for Competitive Gamers</span>
+  </h1>
+  <p class="hero-desc">The same neurocognitive and sensorimotor training used by elite athletes — adapted for esports. Sharpen reaction time, visual processing, and decision-making under pressure.</p>
+  <div class="hero-stats-row">
+    <div class="hero-mini-stat"><div class="val">93%</div><div class="label">Efficacy Rate</div></div>
+    <div class="hero-mini-stat"><div class="val">3-4</div><div class="label">Weeks to Results</div></div>
+    <div class="hero-mini-stat"><div class="val">25%</div><div class="label">Reaction Improvement</div></div>
+  </div>
+  <div class="hero-cta">
+    <a href="#training" class="btn-neon">Launch Training Hub</a>
+    <a href="#skills" class="btn-ghost">Learn More</a>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <span class="section-label">01 — What We Train</span>
+    <h2 class="section-title">Cognitive Skills That Win Games</h2>
+    <p class="section-desc">Every millisecond matters in competitive gaming. This protocol targets the neural systems that determine who clicks faster, tracks better, and decides smarter.</p>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="skill-card"><span class="skill-icon">⚡</span><h3>Reaction Speed</h3><p>Reduce input-to-action delay by training the neural pathways between visual stimulus and motor response. Faster flicks, faster peeks, faster wins.</p></div>
+    <div class="skill-card"><span class="skill-icon">👁</span><h3>Visual Processing</h3><p>Track multiple targets, detect movement in peripheral vision, and process visual information faster under chaotic conditions — clutch or kick.</p></div>
+    <div class="skill-card"><span class="skill-icon">🧠</span><h3>Decision Making</h3><p>Accelerate cognitive processing for split-second calls under pressure. Rotate, push, hold, or retreat — your brain decides before you realize.</p></div>
+    <div class="skill-card"><span class="skill-icon">🎯</span><h3>Target Acquisition</h3><p>Improve aim precision through visual-motor coordination training. Not just muscle memory — actual neural pathway optimization for crosshair control.</p></div>
+    <div class="skill-card"><span class="skill-icon">🔄</span><h3>Task Switching</h3><p>Train rapid context-switching between minimap awareness, cooldown tracking, economy management, and active combat without cognitive lag.</p></div>
+    <div class="skill-card"><span class="skill-icon">🔥</span><h3>Clutch Performance</h3><p>Build mental resilience for high-pressure moments. When it's 1v3 overtime, your brain either locks in or locks up. Train it to lock in.</p></div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- SCIENCE -->
+<section id="science">
+  <div class="reveal">
+    <span class="section-label">02 — The Science</span>
+    <h2 class="section-title">Proven Neuroscience Tools</h2>
+    <p class="section-desc">Adapted from Dr. Juan Delgado's BOS Neurocognitive Protocol — tools used by professional athletes, now calibrated for competitive gaming performance.</p>
+  </div>
+  <div class="science-grid reveal">
+    <div class="science-row"><span class="science-name">Strobe Training</span><span class="science-desc">Digital strobe disruption forces your brain to process visual information with limited input — building faster, more efficient neural pathways for target tracking and awareness.</span></div>
+    <div class="science-row"><span class="science-name">Visual-Motor Drills</span><span class="science-desc">Structured exercises that strengthen the connection between what your eyes see and how fast your hands respond — the core loop of competitive gaming.</span></div>
+    <div class="science-row"><span class="science-name">Cognitive-Motor Timing</span><span class="science-desc">Rhythm and timing synchronization training that improves the precision of your inputs. Consistent timing wins rounds — in aim duels and ability rotations alike.</span></div>
+    <div class="science-row"><span class="science-name">Load Distribution</span><span class="science-desc">Cognitive load management training — how to maintain peak performance when your brain is processing minimap, comms, abilities, economy, and enemies simultaneously.</span></div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- PROTOCOLS -->
+<section>
+  <div class="reveal">
+    <span class="section-label">03 — Training Protocols</span>
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-desc">Structured progressions that build real cognitive performance gains — not just aim training, but brain training.</p>
+  </div>
+  <div class="protocols-list reveal">
+    <div class="protocol-item"><span class="protocol-num">01</span><div class="protocol-content"><h3>Visual Tracking Under Disruption</h3><p>Strobe-based drills that progressively limit visual input, forcing your brain to build predictive models and faster processing pathways for target tracking.</p></div></div>
+    <div class="protocol-item"><span class="protocol-num">02</span><div class="protocol-content"><h3>Reaction Speed Optimization</h3><p>Progressive stimulus-response challenges calibrated to improve raw reaction time and decision accuracy — the two variables that determine every duel outcome.</p></div></div>
+    <div class="protocol-item"><span class="protocol-num">03</span><div class="protocol-content"><h3>Multi-Target Awareness</h3><p>Exercises that train peripheral detection and split-attention processing — tracking multiple threats simultaneously without tunnel vision.</p></div></div>
+    <div class="protocol-item"><span class="protocol-num">04</span><div class="protocol-content"><h3>Pressure Inoculation</h3><p>Progressively increasing cognitive load and time pressure to build mental resilience — so your brain performs the same in ranked as it does in deathmatch warmup.</p></div></div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- RESULTS -->
+<section id="results">
+  <div class="reveal">
+    <span class="section-label">04 — Proven Results</span>
+    <h2 class="section-title">Performance Data</h2>
+    <p class="section-desc">Evidence-based outcomes from the BOS Neurocognitive Protocol — measured across athletes, applicable to any high-performance domain including esports.</p>
+  </div>
+  <div class="stats-grid reveal">
+    <div class="stat-card"><div class="stat-number">10–25%</div><div class="stat-label">Accuracy Improvement</div><div class="stat-detail">Over 6-week protocol</div></div>
+    <div class="stat-card"><div class="stat-number">3–4</div><div class="stat-label">Weeks to Results</div><div class="stat-detail">Measurable reaction gains</div></div>
+    <div class="stat-card"><div class="stat-number">93%</div><div class="stat-label">Peak Efficacy</div><div class="stat-detail">Full protocol adherence</div></div>
+    <div class="stat-card"><div class="stat-number">74%</div><div class="stat-label">Minimum Efficacy</div><div class="stat-detail">Baseline improvement rate</div></div>
+  </div>
+  <div class="efficacy-section reveal">
+    <div class="efficacy-title">Protocol Efficacy Range</div>
+    <div class="efficacy-bars">
+      <div class="efficacy-row"><span class="efficacy-label">Baseline</span><div class="bar-track"><div class="bar-fill" style="--target-width: 74%"></div></div><span class="efficacy-value">74%</span></div>
+      <div class="efficacy-row"><span class="efficacy-label">Full Protocol</span><div class="bar-track"><div class="bar-fill" style="--target-width: 93%"></div></div><span class="efficacy-value">93%</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- AUDIENCE -->
+<section>
+  <div class="reveal">
+    <span class="section-label">05 — Who This Is For</span>
+    <h2 class="section-title">Built for Competitors</h2>
+    <p class="section-desc">Whether you're grinding ranked or competing on LAN — if reaction time, visual processing, and decision speed matter to your game, this is for you.</p>
+  </div>
+  <div class="audience-grid reveal">
+    <div class="audience-card"><div class="audience-icon">🏆</div><h3>Pro & Semi-Pro Teams</h3><p>Organized esports teams & orgs</p></div>
+    <div class="audience-card"><div class="audience-icon">🎓</div><h3>Collegiate Esports</h3><p>University competitive programs</p></div>
+    <div class="audience-card"><div class="audience-icon">📈</div><h3>Ranked Grinders</h3><p>Competitive ladder players</p></div>
+    <div class="audience-card"><div class="audience-icon">🎮</div><h3>Content Creators</h3><p>Streamers pushing performance</p></div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- TRAINING HUB -->
+<div class="training-hub" id="training">
+  <div class="reveal">
+    <span class="section-label">06 — Training Hub</span>
+    <h2 class="section-title">Start Training</h2>
+    <p class="section-desc">Browser-based neurocognitive drills you can run between matches. No downloads. No hardware. Just sharper cognitive performance.</p>
+  </div>
+
+  <div class="games-grid reveal">
+    <div class="game-card active-game" onclick="window.location.href='strobe.html'">
+      <div class="game-card-header">
+        <span class="game-status status-live">● Live</span>
+        <span class="game-icon">👁</span>
+        <h3>Strobe Drill</h3>
+        <p>Track and eliminate targets while strobe disruptions limit your visual input. Trains reaction speed, visual memory, and target acquisition under pressure.</p>
+      </div>
+      <div class="game-tiers">
+        <div class="tier-dot filled"></div><div class="tier-dot filled"></div><div class="tier-dot filled"></div><div class="tier-dot filled"></div><div class="tier-dot filled"></div>
+      </div>
+      <div class="game-card-footer">
+        <div class="game-tags"><span class="game-tag">Reaction</span><span class="game-tag">Visual</span><span class="game-tag">Tracking</span></div>
+        <a href="strobe.html" class="game-launch-btn" onclick="event.stopPropagation()">Launch</a>
+      </div>
+    </div>
+
+    <div class="game-card coming-soon">
+      <div class="game-card-header">
+        <span class="game-status status-soon">Coming Soon</span>
+        <span class="game-icon">🎯</span>
+        <h3>Crosshair Control</h3>
+        <p>Precision tracking and flick-shot challenges with progressive difficulty scaling. Trains the visual-motor loop that determines aim accuracy.</p>
+      </div>
+      <div class="game-tiers"><div class="tier-dot"></div><div class="tier-dot"></div><div class="tier-dot"></div><div class="tier-dot"></div><div class="tier-dot"></div></div>
+      <div class="game-card-footer">
+        <div class="game-tags"><span class="game-tag">Aim</span><span class="game-tag">Precision</span><span class="game-tag">Flick</span></div>
+      </div>
+    </div>
+
+    <div class="game-card coming-soon">
+      <div class="game-card-header">
+        <span class="game-status status-soon">Coming Soon</span>
+        <span class="game-icon">🔄</span>
+        <h3>Split Focus</h3>
+        <p>Multi-zone awareness challenge — track threats across multiple screen regions simultaneously. Trains peripheral processing and task switching speed.</p>
+      </div>
+      <div class="game-tiers"><div class="tier-dot"></div><div class="tier-dot"></div><div class="tier-dot"></div><div class="tier-dot"></div><div class="tier-dot"></div></div>
+      <div class="game-card-footer">
+        <div class="game-tags"><span class="game-tag">Awareness</span><span class="game-tag">Multi-task</span><span class="game-tag">Peripheral</span></div>
+      </div>
+    </div>
+
+    <div class="game-card coming-soon">
+      <div class="game-card-header">
+        <span class="game-status status-soon">Coming Soon</span>
+        <span class="game-icon">⚡</span>
+        <h3>Clutch Timer</h3>
+        <p>Decision-making under extreme time pressure with escalating cognitive load. Trains the neural pathways that separate clutch players from everyone else.</p>
+      </div>
+      <div class="game-tiers"><div class="tier-dot"></div><div class="tier-dot"></div><div class="tier-dot"></div><div class="tier-dot"></div><div class="tier-dot"></div></div>
+      <div class="game-card-footer">
+        <div class="game-tags"><span class="game-tag">Pressure</span><span class="game-tag">Decision</span><span class="game-tag">Speed</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="reveal">
+    <span class="section-label">GG Go Next</span>
+    <h2 class="section-title">Your Brain Is<br>Your Best Weapon</h2>
+    <p>Aim trainers build muscle memory. BOS Esports builds the neural hardware that muscle memory runs on. Train the source.</p>
+    <a href="strobe.html" class="btn-neon">Launch Strobe Drill</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>BOS Esports — Neurocognitive Performance Training — Based on the BOS Protocol by Dr. Juan Delgado — 2025</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        entry.target.querySelectorAll('.bar-fill').forEach(bar => {
+          setTimeout(() => bar.classList.add('animated'), 300);
+        });
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('section, .training-hub');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.getAttribute('id'); });
+    navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+  });
+</script>
+
+</body>
+</html>
